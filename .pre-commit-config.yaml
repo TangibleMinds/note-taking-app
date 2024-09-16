@@ -1,0 +1,28 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
+
+- repo: https://github.com/python-poetry/poetry
+  rev: ''
+  hooks:
+    -   id: poetry-export # makes sure the requirements.txt are in sync with current deps
+        args: ["-f", "requirements.txt"]
+        verbose: true
+    -   id: poetry-check # makes sure poetry config is not commited in broken state
+    #-   id: poetry-lock # this makes sure the lock file is consistent with commit changes
+    -   id: poetry-install # makes sure all the locked files are installed in the env
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  # Ruff version.
+  rev: v0.4.2
+  hooks:
+    # Run the linter.
+    - id: ruff
+      args: [ --fix ]
+    # Run the formatter.
+    - id: ruff-format

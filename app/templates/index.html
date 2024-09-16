@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>My Notes</h1>
+
+<!-- Form to create a new note -->
+<form id="create-note-form" method="post">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title" required>
+    </div>
+    <div class="mb-3">
+        <label for="content" class="form-label">Content</label>
+        <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Note</button>
+</form>
+
+<hr>
+
+<!-- List of notes -->
+<ul class="list-group mt-4">
+    {% for note in notes %}
+    <li class="list-group-item">
+        <h5>{{ note.title }}</h5>
+        <p>{{ note.content }}</p>
+        <small>Created at: {{ note.created_at }}</small>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
